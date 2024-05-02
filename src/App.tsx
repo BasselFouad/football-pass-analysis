@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { loadData } from "./data/loadData";
 import {
-  PlayerPassValueStats,
   AnalyticsTracker,
   IMatch,
   IData,
@@ -16,7 +15,7 @@ import {
 import ChartContainer from "./components/charts/chartContainer";
 import { FilterDropDown } from "./components/dropDown/dropDown";
 import { FILTER } from "./enums/filterType";
-import { getAllPlayers, getTopPassers } from "./data/topPasserRecipient";
+import { getAllPlayers } from "./data/topPasserRecipient";
 
 const App = () => {
   const [fullAnalyticsData, setFullAnalyticsData] = useState<IData>();
@@ -24,7 +23,6 @@ const App = () => {
   const [analyticsTracker, setAnalyticsTracker] =
     useState<AnalyticsTracker | null>(null);
 
-  const [topPassers, setTopPassers] = useState<PlayerPassValueStats[] | []>([]);
 
   const [matches, setMatches] = useState<IMatch[]>([]);
   const [players, setPlayers] = useState<IPlayer[]>([]);
@@ -57,13 +55,7 @@ const App = () => {
     }
   }, [selectedMatch, selectedPlayer]);
 
-  useEffect(() => {
-    if (analyticsTracker) {
-      setTopPassers(
-        getTopPassers(analyticsTracker?.playerPassValueAccumulator)
-      );
-    }
-  }, [analyticsTracker]);
+
 
 
   return (
